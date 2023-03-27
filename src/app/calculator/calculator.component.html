@@ -1,0 +1,37 @@
+<div class="block"> 
+  <label for="overrideRate">Override Rate:</label>
+  <input type="number" id="overrideRate" [(ngModel)]="overrideRate" [disabled]="isOverrideActive" />
+  <button (click)="activateOverride()" [disabled]="isOverrideActive">Activate Override</button>
+  <button (click)="deactivateOverride()" [disabled]="!isOverrideActive">Deactivate Override</button>
+  
+</div>
+<div class="block">
+<label for="input">{{inputType}}:</label>
+<input type="text" [formControl]="userInput" [value]="inputVal">
+<button class="button" (click)="calculate()">calculate</button>
+</div>
+<button (click)="replace()">
+    <span class="exchange-icon"></span>
+  </button>
+<div class="block">
+<label for="output">{{outputType}}:</label>
+<h2 id="output" >{{outputVal}}</h2>
+</div>
+<table>
+  <tr>
+  <th>realtime fix val</th>
+  <th>overRide fix val</th>
+  <th>initial amount</th>
+  <th>initial amount currency</th>
+  <th> converted amount</th>
+  <th>converted amount currency</th>
+  </tr>
+  <tr *ngFor="let record of records">
+     <td>{{record?.realFxRate}}</td>
+    <td>{{record?.override}}</td>
+    <td>{{record?.intialAmount}}</td>
+    <td>{{record?.initialCurrency}}</td>
+    <td>{{record?.convertedAmount}}</td>
+    <td>{{record?.convertedCurrency}}</td>
+  </tr>
+</table>
