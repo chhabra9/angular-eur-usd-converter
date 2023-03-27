@@ -1,37 +1,65 @@
-<div class="block"> 
-  <label for="overrideRate">Override Rate:</label>
-  <input type="number" id="overrideRate" [(ngModel)]="overrideRate" [disabled]="isOverrideActive" />
-  <button (click)="activateOverride()" [disabled]="isOverrideActive">Activate Override</button>
-  <button (click)="deactivateOverride()" [disabled]="!isOverrideActive">Deactivate Override</button>
-  
-</div>
-<div class="block">
-<label for="input">{{inputType}}:</label>
-<input type="text" [formControl]="userInput" [value]="inputVal">
-<button class="button" (click)="calculate()">calculate</button>
-</div>
-<button (click)="replace()">
-    <span class="exchange-icon"></span>
-  </button>
-<div class="block">
-<label for="output">{{outputType}}:</label>
-<h2 id="output" >{{outputVal}}</h2>
-</div>
-<table>
-  <tr>
-  <th>realtime fix val</th>
-  <th>overRide fix val</th>
-  <th>initial amount</th>
-  <th>initial amount currency</th>
-  <th> converted amount</th>
-  <th>converted amount currency</th>
-  </tr>
-  <tr *ngFor="let record of records">
-     <td>{{record?.realFxRate}}</td>
-    <td>{{record?.override}}</td>
-    <td>{{record?.intialAmount}}</td>
-    <td>{{record?.initialCurrency}}</td>
-    <td>{{record?.convertedAmount}}</td>
-    <td>{{record?.convertedCurrency}}</td>
-  </tr>
-</table>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for=" exchange-rate" class="text-white">Override exchange Rate</label>
+        <div class="input-group">
+          <input type="number" class="form-control me-2" [(ngModel)]="overrideRate" [disabled]="isOverrideActive" placeholder="Enter exchange rate...">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary me-2" type="button" (click)="activateOverride()"[disabled]="isOverrideActive" >Enable</button>
+            <button class="btn btn-outline-secondary" type="button" (click)="deactivateOverride()" [disabled]="!isOverrideActive">Disable</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="usd-input" class="text-white">{{inputType}} Input</label>
+        <div class="input-group">
+          <input type="number" class="form-control me-2" placeholder="Enter {{inputType}}..." [formControl]="userInput" [value]="inputVal">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" (click)="calculate()">Calculate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="output" class="text-white">{{outputType}} Output</label>
+        <input type="text" class="form-control" [value]="outputVal" readonly>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+      <button class="btn btn-outline-light w-100 mt-2" type="button" id="swap-btn" (click)="replace()">Swap Currency</button>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <h3 class="text-white mb-3">Last 5 Calculations</h3>
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Fix Rate</th>
+            <th scope="col">Override Rate </th>
+            <th scope="col">Input</th>
+            <th scope="col">Input Currency</th>
+            <th scope="col">Output</th>
+            <th scope="col">Output Currency</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let record of records" class="table-row">
+            <td>{{record?.realFxRate}}</td>
+           <td>{{record?.override}}</td>
+           <td>{{record?.intialAmount}}</td>
+           <td>{{record?.initialCurrency}}</td>
+           <td>{{record?.convertedAmount}}</td>
+           <td>{{record?.convertedCurrency}}</td>
+         </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+

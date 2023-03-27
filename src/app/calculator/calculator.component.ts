@@ -17,7 +17,7 @@ export class CalculatorComponent {
  fixRate:number=1.1;
  index:number=0;
  isOverrideActive:boolean=false;
-records:{"realFxRate":number,
+records:{realFxRate:number,
 override:number,
 intialAmount:number,
 convertedAmount:number,
